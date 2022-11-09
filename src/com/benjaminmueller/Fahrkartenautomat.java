@@ -13,11 +13,11 @@ class Fahrkartenautomat {
         double rueckgabebetrag;
         double nochZuZahlen;
 
-        // 1
-        System.out.print("Zu  zahlender Betrag (Euro): ");
+        // 1 : Geldbetrag eingeben
+        System.out.print("Zu zahlender Betrag (Euro): ");
         zuZahlenderBetrag = tastatur.nextDouble();
 
-        // 2
+        // 2 : Geldeinwurf
         eingezahlterGesamtbetrag = 0.0;
         nochZuZahlen = 0.0;
         while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
@@ -28,7 +28,7 @@ class Fahrkartenautomat {
             eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + eingeworfeneMuenze;
         }
 
-        // 3
+        // 3 : Fahrscheinausgabe
         System.out.println("\nFahrschein wird ausgegeben");
         for (int i = 0; i < 8; i++) {
             System.out.print("=");
@@ -41,7 +41,7 @@ class Fahrkartenautomat {
         }
         System.out.println("\n\n");
 
-        // 4
+        // 4 : Rückgeldberechung und -ausgabe
         rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
         if (rueckgabebetrag > 0.0) {
             System.out.println("Der Rückgabebetrag in Höhe von " + rueckgabebetrag + " Euro");
