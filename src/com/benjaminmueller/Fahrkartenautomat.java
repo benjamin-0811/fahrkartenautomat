@@ -14,7 +14,7 @@ class Fahrkartenautomat {
         double nochZuZahlen;
 
         // 1
-        System.out.print("Zu zahlender Betrag (Euro): ");
+        System.out.print("Zu  zahlender Betrag (Euro): ");
         zuZahlenderBetrag = tastatur.nextDouble();
 
         // 2
