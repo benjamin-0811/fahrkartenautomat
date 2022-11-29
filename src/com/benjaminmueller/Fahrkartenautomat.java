@@ -12,10 +12,21 @@ class Fahrkartenautomat {
         double eingeworfeneMuenze;
         double rueckgabebetrag;
         double nochZuZahlen;
+        int ticketAnzahl;
 
-        // 1 : Geldbetrag eingeben
-        System.out.print("Zu zahlender Betrag (Euro): ");
+        // // 1 : Geldbetrag eingeben
+        // System.out.print("Zu zahlender Betrag (Euro): ");
+        // zuZahlenderBetrag = tastatur.nextDouble();
+
+        // 1.1 : Ticketpreis eingeben
+        System.out.print("Ticketpreis (Euro): ");
         zuZahlenderBetrag = tastatur.nextDouble();
+
+        // 1.2 : Anzahl der Tickets eingeben
+        System.out.print("Anzahl der Tickets: ");
+        ticketAnzahl = tastatur.nextInt();
+
+        zuZahlenderBetrag *= ticketAnzahl;
 
         // 2 : Geldeinwurf
         eingezahlterGesamtbetrag = 0.0;
