@@ -44,7 +44,7 @@ class Fahrkartenautomat {
         // 4 : Rückgeldberechung und -ausgabe
         rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
         if (rueckgabebetrag > 0.0) {
-            System.out.println("Der Rückgabebetrag in Höhe von " + rueckgabebetrag + " Euro");
+            System.out.printf("Der Rückgabebetrag in Höhe von %.2f Euro\n", rueckgabebetrag);
             System.out.println("wird in folgenden Münzen ausgezahlt:");
 
             while (rueckgabebetrag >= 2.0) { // 2-Euro-Münzen
