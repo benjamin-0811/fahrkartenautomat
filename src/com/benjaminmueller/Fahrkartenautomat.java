@@ -22,7 +22,7 @@ class Fahrkartenautomat {
         nochZuZahlen = 0.0;
         while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
             nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
-            System.out.println("Noch zu zahlen: " + nochZuZahlen);
+            System.out.printf("Noch zu zahlen: %.2f Euro\n", nochZuZahlen);
             System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): ");
             eingeworfeneMuenze = tastatur.nextDouble();
             eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + eingeworfeneMuenze;
