@@ -36,7 +36,7 @@ class Fahrkartenautomat {
             System.out.printf("Noch zu zahlen: %.2f Euro\n", nochZuZahlen);
             System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): ");
             eingeworfeneMuenze = tastatur.nextDouble();
-            eingezahlterGesamtbetrag = eingezahlterGesamtbetrag + eingeworfeneMuenze;
+            eingezahlterGesamtbetrag += eingeworfeneMuenze;
         }
 
         // 3 : Fahrscheinausgabe
@@ -60,27 +60,30 @@ class Fahrkartenautomat {
 
             while (rueckgabebetrag >= 2.0) { // 2-Euro-Münzen
                 System.out.println("2 Euro");
-                rueckgabebetrag = rueckgabebetrag - 2.0;
+                rueckgabebetrag -= 2.0;
             }
             while (rueckgabebetrag >= 1.0) { // 1-Euro-Münzen
                 System.out.println("1 Euro");
-                rueckgabebetrag = rueckgabebetrag - 1.0;
+                rueckgabebetrag -= 1.0;
             }
             while (rueckgabebetrag >= 0.5) { // 50-Cent-Münzen
                 System.out.println("50 Cent");
-                rueckgabebetrag = rueckgabebetrag - 0.5;
+                rueckgabebetrag -= 0.5;
             }
             while (rueckgabebetrag >= 0.2) { // 20-Cent-Münzen
                 System.out.println("20 Cent");
-                rueckgabebetrag = rueckgabebetrag - 0.2;
+                rueckgabebetrag -= 0.2;
+                rueckgabebetrag = roundEuro(rueckgabebetrag);
             }
             while (rueckgabebetrag >= 0.1) { // 10-Cent-Münzen
                 System.out.println("10 Cent");
-                rueckgabebetrag = rueckgabebetrag - 0.1;
+                rueckgabebetrag -= 0.1;
+                rueckgabebetrag = roundEuro(rueckgabebetrag);
             }
             while (rueckgabebetrag >= 0.05) { // 5-Cent-Münzen
                 System.out.println("5 Cent");
-                rueckgabebetrag = rueckgabebetrag - 0.05;
+                rueckgabebetrag -= 0.05;
+                rueckgabebetrag = roundEuro(rueckgabebetrag);
             }
         }
 
@@ -88,5 +91,9 @@ class Fahrkartenautomat {
                 + "Wir wünschen Ihnen eine gute Fahrt.");
 
         tastatur.close();
+    }
+
+    private static double roundEuro(double x) {
+        return Math.round(x * 100) / 100.0d;
     }
 }
