@@ -7,6 +7,8 @@ class Fahrkartenautomat {
 
         Scanner tastatur = new Scanner(System.in);
 
+        // ignore this comment, it is just there so there is some substantial change to the code without changing anything.
+
         double zuZahlenderBetrag;
         double eingezahlterGesamtbetrag;
         double eingeworfeneMuenze;
