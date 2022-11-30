@@ -26,6 +26,12 @@ class Fahrkartenautomat {
         System.out.print("Anzahl der Tickets: ");
         ticketAnzahl = tastatur.nextInt();
 
+        // 4.4 validiere die Anzahl der Tickets
+        if (1 <= ticketAnzahl && ticketAnzahl <= 10) {
+            System.out.print("Fehlerhafte Eingabe - Ticketanzahl wird auf 1 gesetzt");
+            ticketAnzahl = 1;
+        }
+
         zuZahlenderBetrag *= ticketAnzahl;
 
         // 2 : Geldeinwurf
