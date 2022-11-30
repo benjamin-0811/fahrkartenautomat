@@ -1,8 +1,13 @@
 package com.benjaminmueller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 class Fahrkartenautomat {
+
+    // private static final ArrayList<Double> VALID_AMOUNTS = new ArrayList<>(Arrays.asList(0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0));
+
     public static void main(String[] args) {
 
         Scanner tastatur = new Scanner(System.in);
@@ -27,7 +32,7 @@ class Fahrkartenautomat {
         ticketAnzahl = tastatur.nextInt();
 
         // 4.4 validiere die Anzahl der Tickets
-        if (1 <= ticketAnzahl && ticketAnzahl <= 10) {
+        if (ticketAnzahl < 1 || ticketAnzahl > 10) {
             System.out.print("Fehlerhafte Eingabe - Ticketanzahl wird auf 1 gesetzt");
             ticketAnzahl = 1;
         }
@@ -40,8 +45,13 @@ class Fahrkartenautomat {
         while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
             nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
             System.out.printf("Noch zu zahlen: %.2f Euro\n", nochZuZahlen);
-            System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): ");
+            System.out.print("Eingabe (mind. 5 Cent, höchstens 2 Euro): "); // set 2 to 20
             eingeworfeneMuenze = tastatur.nextDouble();
+            /*
+             * if (isValidAmountOfMoney(eingeworfeneMuenze)) {
+             *     eingezahlterGesamtbetrag += eingeworfeneMuenze;
+             * }
+             */
             eingezahlterGesamtbetrag += eingeworfeneMuenze;
         }
 
@@ -102,4 +112,10 @@ class Fahrkartenautomat {
     private static double roundEuro(double x) {
         return Math.round(x * 100) / 100.0d;
     }
+
+    /*
+     * private static boolean isValidAmountOfMoney(double amount) {
+     *     return VALID_AMOUNTS.contains(amount);
+     * }
+     */
 }
