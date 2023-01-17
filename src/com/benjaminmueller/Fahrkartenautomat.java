@@ -33,45 +33,60 @@ class Fahrkartenautomat {
          * zuZahlenderBetrag = tastatur.nextDouble();
          */
 
-        // 5.3 Fahrkartenauswahl
-        System.out.println("Wählen Sie ihre Wunschfahrkarte für Berlin AB aus:");
+        // 5.4 Fahrkarten kombinieren
+        zuZahlenderBetrag = 0;
         int anzahlTicketTypen = PriceByTicketType.size();
+        int quitNumber = anzahlTicketTypen + 1;
         double[] priceArray = new double[anzahlTicketTypen];
-        int priceByTicketTypeIndex = 0;
-        for (String key : PriceByTicketType.keySet()) {
-            double price = PriceByTicketType.get(key);
-            priceArray[priceByTicketTypeIndex] = price;
-            System.out.printf("  %s [%.2f EUR] (%d)\n", key, price, priceByTicketTypeIndex + 1);
-            priceByTicketTypeIndex++;
-        }
-        System.out.print("Ihre Wahl: ");
-        int ticketId = tastatur.nextInt();
-        while (ticketId > anzahlTicketTypen || ticketId < 1) {
-            System.out.println(" >>falsche Eingabe<<");
-            ticketId = tastatur.nextInt();
-        }
-        zuZahlenderBetrag = priceArray[ticketId - 1];
+        boolean runLoop = true;
+        while (true) {
+            // 5.3 Fahrkartenauswahl
+            System.out.println("Wählen Sie ihre Wunschfahrkarte für Berlin AB aus:");
+            int priceByTicketTypeIndex = 0;
+            for (String key : PriceByTicketType.keySet()) {
+                double price = PriceByTicketType.get(key);
+                priceArray[priceByTicketTypeIndex] = price;
+                System.out.printf("  %s [%.2f EUR] (%d)\n", key, price, priceByTicketTypeIndex + 1);
+                priceByTicketTypeIndex++;
+            }
+            System.out.printf("  Bezahlen (%d)\n", quitNumber);
+            System.out.print("Ihre Wahl: ");
+            int ticketId = tastatur.nextInt();
+            while (ticketId > anzahlTicketTypen || ticketId < 1) {
+                if (ticketId == quitNumber) {
+                    runLoop = false;
+                    break;
+                }
+                System.out.println(" >>falsche Eingabe<<");
+                ticketId = tastatur.nextInt();
+            }
+            if (!runLoop)
+                break;
+            double currentPrice = priceArray[ticketId - 1];
 
-        // 1.2 : Anzahl der Tickets eingeben
-        System.out.print("Anzahl der Tickets: ");
-        ticketAnzahl = tastatur.nextInt();
 
-        // 4.4 validiere die Anzahl der Tickets
-        /*
-         * if (ticketAnzahl < 1 || ticketAnzahl > 10) {
-         *     System.out.print("Fehlerhafte Eingabe - Ticketanzahl wird auf 1 gesetzt");
-         *     ticketAnzahl = 1;
-         * }
-         */
-
-        // 5.2 : Wiederholung der Eingabe der Ticketanzahl
-        while (ticketAnzahl > 10 || ticketAnzahl < 1) {
-            System.out.println(" >> Wählen Sie bitte eine Anzahl von 1 bis 10 aus. <<");
+            // 1.2 : Anzahl der Tickets eingeben
             System.out.print("Anzahl der Tickets: ");
             ticketAnzahl = tastatur.nextInt();
-        }
 
-        zuZahlenderBetrag *= ticketAnzahl;
+            // 4.4 validiere die Anzahl der Tickets
+            /*
+             * if (ticketAnzahl < 1 || ticketAnzahl > 10) {
+             *     System.out.print("Fehlerhafte Eingabe - Ticketanzahl wird auf 1 gesetzt");
+             *     ticketAnzahl = 1;
+             * }
+             */
+
+            // 5.2 : Wiederholung der Eingabe der Ticketanzahl
+            while (ticketAnzahl > 10 || ticketAnzahl < 1) {
+                System.out.println(" >> Wählen Sie bitte eine Anzahl von 1 bis 10 aus. <<");
+                System.out.print("Anzahl der Tickets: ");
+                ticketAnzahl = tastatur.nextInt();
+            }
+
+            zuZahlenderBetrag += currentPrice * ticketAnzahl;
+            System.out.printf("Zwischensumme: %.2f €\n", zuZahlenderBetrag);
+        }
 
         // 2 : Geldeinwurf
         eingezahlterGesamtbetrag = 0.0;
