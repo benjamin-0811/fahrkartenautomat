@@ -1,7 +1,6 @@
 package com.benjaminmueller;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Rom {
     public static final LinkedHashMap<Character, Integer> ROMAN_NUMERALS = new LinkedHashMap<Character, Integer>() {{
@@ -13,8 +12,6 @@ public class Rom {
             put('D', 500);
             put('M', 1000);
     }};
-    public static final int[] NO_REPEATS = {5, 50, 500};
-    public static final int[] SUBTRACTS = {1, 10, 100};
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
