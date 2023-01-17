@@ -1,12 +1,16 @@
 package com.benjaminmueller;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 class Fahrkartenautomat {
 
     private static final ArrayList<Double> VALID_AMOUNTS = new ArrayList<>(Arrays.asList(0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0));
+    private static final LinkedHashMap<String, Double> PriceByTicketType = new LinkedHashMap<String, Double>() {{
+        put("Kurzstrecke AB", 2.0);
+        put("Einzelfahrschein AB", 3.0);
+        put("Tageskarte AB", 8.8);
+        put("4-Fahrten-Karte AB", 9.8);
+    }};
 
     public static void main(String[] args) {
 
@@ -24,19 +28,33 @@ class Fahrkartenautomat {
         // zuZahlenderBetrag = tastatur.nextDouble();
 
         // 1.1 : Ticketpreis eingeben
-        System.out.print("Ticketpreis (Euro): ");
-        zuZahlenderBetrag = tastatur.nextDouble();
+        /*
+         * System.out.print("Ticketpreis (Euro): ");
+         * zuZahlenderBetrag = tastatur.nextDouble();
+         */
+
+        // 5.3 Fahrkartenauswahl
+        System.out.println("Wählen Sie ihre Wunschfahrkarte für Berlin AB aus:");
+        int anzahlTicketTypen = PriceByTicketType.size();
+        double[] priceArray = new double[anzahlTicketTypen];
+        int priceByTicketTypeIndex = 0;
+        for (String key : PriceByTicketType.keySet()) {
+            double price = PriceByTicketType.get(key);
+            priceArray[priceByTicketTypeIndex] = price;
+            System.out.printf("  %s [%.2f EUR] (%d)\n", key, price, priceByTicketTypeIndex + 1);
+            priceByTicketTypeIndex++;
+        }
+        System.out.print("Ihre Wahl: ");
+        int ticketId = tastatur.nextInt();
+        while (ticketId > anzahlTicketTypen || ticketId < 1) {
+            System.out.println(" >>falsche Eingabe<<");
+            ticketId = tastatur.nextInt();
+        }
+        zuZahlenderBetrag = priceArray[ticketId - 1];
 
         // 1.2 : Anzahl der Tickets eingeben
         System.out.print("Anzahl der Tickets: ");
         ticketAnzahl = tastatur.nextInt();
-
-        // 5.2 : Wiederholung der Eingabe der Ticketanzahl
-        while (ticketAnzahl > 10 || ticketAnzahl < 1) {
-            System.out.print(" >> Wählen Sie bitte eine Anzahl von 1 bis 10 aus. <<");
-            System.out.print("Anzahl der Tickets: ");
-            ticketAnzahl = tastatur.nextInt();
-        }
 
         // 4.4 validiere die Anzahl der Tickets
         /*
@@ -45,6 +63,13 @@ class Fahrkartenautomat {
          *     ticketAnzahl = 1;
          * }
          */
+
+        // 5.2 : Wiederholung der Eingabe der Ticketanzahl
+        while (ticketAnzahl > 10 || ticketAnzahl < 1) {
+            System.out.println(" >> Wählen Sie bitte eine Anzahl von 1 bis 10 aus. <<");
+            System.out.print("Anzahl der Tickets: ");
+            ticketAnzahl = tastatur.nextInt();
+        }
 
         zuZahlenderBetrag *= ticketAnzahl;
 
