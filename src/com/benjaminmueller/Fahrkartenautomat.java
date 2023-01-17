@@ -31,11 +31,20 @@ class Fahrkartenautomat {
         System.out.print("Anzahl der Tickets: ");
         ticketAnzahl = tastatur.nextInt();
 
-        // 4.4 validiere die Anzahl der Tickets
-        if (ticketAnzahl < 1 || ticketAnzahl > 10) {
-            System.out.print("Fehlerhafte Eingabe - Ticketanzahl wird auf 1 gesetzt");
-            ticketAnzahl = 1;
+        // 5.2 : Wiederholung der Eingabe der Ticketanzahl
+        while (ticketAnzahl > 10 || ticketAnzahl < 1) {
+            System.out.print(" >> Wählen Sie bitte eine Anzahl von 1 bis 10 aus. <<");
+            System.out.print("Anzahl der Tickets: ");
+            ticketAnzahl = tastatur.nextInt();
         }
+
+        // 4.4 validiere die Anzahl der Tickets
+        /*
+         * if (ticketAnzahl < 1 || ticketAnzahl > 10) {
+         *     System.out.print("Fehlerhafte Eingabe - Ticketanzahl wird auf 1 gesetzt");
+         *     ticketAnzahl = 1;
+         * }
+         */
 
         zuZahlenderBetrag *= ticketAnzahl;
 
