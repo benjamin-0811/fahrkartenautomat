@@ -23,18 +23,7 @@ class Fahrkartenautomat {
         begruessung();
         zuZahlenderBetrag = fahrkartenbestellungErfassen(tastatur);
         eingezahlterGesamtbetrag = fahrkartenBezahlen(tastatur, zuZahlenderBetrag);
-
-        System.out.println("\nFahrschein wird ausgegeben");
-        for (int i = 0; i < 8; i++) {
-            System.out.print("=");
-            try {
-                Thread.sleep(200);
-            }
-            catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        System.out.println("\n\n");
+        fahrkartenAusgeben();
 
         rueckgabebetrag = eingezahlterGesamtbetrag - zuZahlenderBetrag;
         if (rueckgabebetrag > 0.0) {
@@ -145,5 +134,19 @@ class Fahrkartenautomat {
             else System.out.println(">> Kein gültiges Zahlungsmittel");
         }
         return eingezahlterGesamtbetrag;
+    }
+
+    private static void fahrkartenAusgeben() {
+        System.out.println("\nFahrschein wird ausgegeben");
+        for (int i = 0; i < 8; i++) {
+            System.out.print("=");
+            try {
+                Thread.sleep(200);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("\n\n");
     }
 }
