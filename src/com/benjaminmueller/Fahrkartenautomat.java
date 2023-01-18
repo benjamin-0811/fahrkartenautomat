@@ -18,24 +18,11 @@ class Fahrkartenautomat {
 
         double zuZahlenderBetrag;
         double eingezahlterGesamtbetrag;
-        double eingeworfeneMuenze;
         double rueckgabebetrag;
-        double nochZuZahlen;
 
         begruessung();
-
         zuZahlenderBetrag = fahrkartenbestellungErfassen(tastatur);
-
-        eingezahlterGesamtbetrag = 0.0;
-        nochZuZahlen = 0.0;
-        while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
-            nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
-            System.out.printf("Noch zu zahlen: %.2f Euro\n", nochZuZahlen);
-            System.out.print("Eingabe (mind. 5 Cent, höchstens 20 Euro): ");
-            eingeworfeneMuenze = tastatur.nextDouble();
-            if (isValidAmountOfMoney(eingeworfeneMuenze)) eingezahlterGesamtbetrag += eingeworfeneMuenze;
-            else System.out.println(">> Kein gültiges Zahlungsmittel");
-        }
+        eingezahlterGesamtbetrag = fahrkartenBezahlen(tastatur, zuZahlenderBetrag);
 
         System.out.println("\nFahrschein wird ausgegeben");
         for (int i = 0; i < 8; i++) {
@@ -144,5 +131,19 @@ class Fahrkartenautomat {
             System.out.printf("Zwischensumme: %.2f €\n", zuZahlenderBetrag);
         }
         return zuZahlenderBetrag;
+    }
+
+    private static double fahrkartenBezahlen(Scanner tastatur, double zuZahlenderBetrag) {
+        double eingezahlterGesamtbetrag = 0.0;
+        double nochZuZahlen;
+        while (eingezahlterGesamtbetrag < zuZahlenderBetrag) {
+            nochZuZahlen = zuZahlenderBetrag - eingezahlterGesamtbetrag;
+            System.out.printf("Noch zu zahlen: %.2f Euro\n", nochZuZahlen);
+            System.out.print("Eingabe (mind. 5 Cent, höchstens 20 Euro): ");
+            double eingeworfeneMuenze = tastatur.nextDouble();
+            if (isValidAmountOfMoney(eingeworfeneMuenze)) eingezahlterGesamtbetrag += eingeworfeneMuenze;
+            else System.out.println(">> Kein gültiges Zahlungsmittel");
+        }
+        return eingezahlterGesamtbetrag;
     }
 }
