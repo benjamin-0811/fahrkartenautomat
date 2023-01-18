@@ -121,33 +121,20 @@ class Fahrkartenautomat {
             System.out.printf("Der Rückgabebetrag in Höhe von %.2f Euro\n", rueckgabebetrag);
             System.out.println("wird in folgenden Münzen ausgezahlt:");
 
-            while (rueckgabebetrag >= 2.0) { // 2-Euro-Münzen
-                System.out.println("2 Euro");
-                rueckgabebetrag -= 2.0;
-            }
-            while (rueckgabebetrag >= 1.0) { // 1-Euro-Münzen
-                System.out.println("1 Euro");
-                rueckgabebetrag -= 1.0;
-            }
-            while (rueckgabebetrag >= 0.5) { // 50-Cent-Münzen
-                System.out.println("50 Cent");
-                rueckgabebetrag -= 0.5;
-            }
-            while (rueckgabebetrag >= 0.2) { // 20-Cent-Münzen
-                System.out.println("20 Cent");
-                rueckgabebetrag -= 0.2;
-                rueckgabebetrag = roundEuro(rueckgabebetrag);
-            }
-            while (rueckgabebetrag >= 0.1) { // 10-Cent-Münzen
-                System.out.println("10 Cent");
-                rueckgabebetrag -= 0.1;
-                rueckgabebetrag = roundEuro(rueckgabebetrag);
-            }
-            while (rueckgabebetrag >= 0.05) { // 5-Cent-Münzen
-                System.out.println("5 Cent");
-                rueckgabebetrag -= 0.05;
-                rueckgabebetrag = roundEuro(rueckgabebetrag);
-            }
+            rueckgabebetrag = muenzrueckgabe(rueckgabebetrag, 2.0, "2 Euro");
+            rueckgabebetrag = muenzrueckgabe(rueckgabebetrag, 1.0, "1 Euro");
+            rueckgabebetrag = muenzrueckgabe(rueckgabebetrag, 0.5, "50 Cent");
+            rueckgabebetrag = muenzrueckgabe(rueckgabebetrag, 0.2, "20 Cent");
+            rueckgabebetrag = muenzrueckgabe(rueckgabebetrag, 0.1, "10 Cent");
+            rueckgabebetrag = muenzrueckgabe(rueckgabebetrag, 0.05, "5 Cent");
         }
+    }
+
+    private static double muenzrueckgabe(double rueckgabebetrag, double muenzwert, String muenzname) {
+        while (rueckgabebetrag >= muenzwert) {
+            System.out.println(muenzname);
+            rueckgabebetrag = roundEuro(rueckgabebetrag - muenzwert);
+        }
+        return rueckgabebetrag;
     }
 }
