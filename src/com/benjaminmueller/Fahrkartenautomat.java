@@ -23,6 +23,8 @@ class Fahrkartenautomat {
         double nochZuZahlen;
         int ticketAnzahl;
 
+        begruessung();
+
         // // 1 : Geldbetrag eingeben
         // System.out.print("Zu zahlender Betrag (Euro): ");
         // zuZahlenderBetrag = tastatur.nextDouble();
@@ -160,5 +162,9 @@ class Fahrkartenautomat {
 
     private static boolean isValidAmountOfMoney(double amount) {
         return VALID_AMOUNTS.contains(amount);
+    }
+
+    private static void begruessung() {
+        System.out.println("Herzlich Willkommen!\n");
     }
 }
