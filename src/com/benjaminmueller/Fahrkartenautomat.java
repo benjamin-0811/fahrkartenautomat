@@ -4,13 +4,39 @@ import java.util.*;
 
 class Fahrkartenautomat {
 
+    @SuppressWarnings("unused")
+    public static class TicketType {
+        private final String name;
+        private double price;
+
+        public String getName() {
+            return name;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        public void setPrice(double price) {
+            this.price = price;
+        }
+
+        public TicketType(String name, double price) {
+            this.name = name;
+            this.price = price;
+        }
+    }
+
     private static final ArrayList<Double> VALID_AMOUNTS = new ArrayList<>(Arrays.asList(0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0));
-    private static final LinkedHashMap<String, Double> PriceByTicketType = new LinkedHashMap<String, Double>() {{
-        put("Kurzstrecke AB", 2.0);
-        put("Einzelfahrschein AB", 3.0);
-        put("Tageskarte AB", 8.8);
-        put("4-Fahrten-Karte AB", 9.8);
-    }};
+    private static final TicketType[] TICKET_TYPES = new TicketType[] {
+            new TicketType("Einzelfahrschein AB", 3.0), new TicketType("Einzelfahrschein BC", 3.5),
+            new TicketType("Einzelfahrschein ABC", 3.8), new TicketType("Kurzstrecke AB", 2.0),
+            new TicketType("Tageskarte AB", 8.6), new TicketType("Tageskarte BC", 9.2),
+            new TicketType("Tageskarte ABC", 10.0), new TicketType("4-Fahrten-Karte AB", 9.4),
+            new TicketType("4-Fahrten-Karte BC", 12.6), new TicketType("4-Fahrten-Karte ABC", 13.8),
+            new TicketType("Kleingruppen-Tageskarte AB", 25.5), new TicketType("Kleingruppen-Tageskarte BC", 26.0),
+            new TicketType("Kleingruppen-Tageskarte ABC", 26.5)
+    };
 
     public static void main(String[] args) {
 
@@ -44,18 +70,14 @@ class Fahrkartenautomat {
 
     private static double fahrkartenbestellungErfassen(Scanner tastatur) {
         double zuZahlenderBetrag = 0;
-        int anzahlTicketTypen = PriceByTicketType.size();
+        int anzahlTicketTypen = TICKET_TYPES.length;
         int quitNumber = anzahlTicketTypen + 1;
-        double[] priceArray = new double[anzahlTicketTypen];
         boolean runLoop = true;
         while (true) {
             System.out.println("Wählen Sie ihre Wunschfahrkarte für Berlin AB aus:");
-            int priceByTicketTypeIndex = 0;
-            for (String key : PriceByTicketType.keySet()) {
-                double price = PriceByTicketType.get(key);
-                priceArray[priceByTicketTypeIndex] = price;
-                System.out.printf("  %s [%.2f EUR] (%d)\n", key, price, priceByTicketTypeIndex + 1);
-                priceByTicketTypeIndex++;
+            for (int i = 0; i < anzahlTicketTypen; i++) {
+                double price = TICKET_TYPES[i].getPrice();
+                System.out.printf("  %s [%.2f EUR] (%d)\n", TICKET_TYPES[i].getName(), price, i + 1);
             }
             System.out.printf("  Bezahlen (%d)\n", quitNumber);
             System.out.print("Ihre Wahl: ");
@@ -70,7 +92,7 @@ class Fahrkartenautomat {
             }
             if (!runLoop)
                 break;
-            double currentPrice = priceArray[ticketId - 1];
+            double currentPrice = TICKET_TYPES[ticketId - 1].getPrice();
 
             System.out.print("Anzahl der Tickets: ");
             int ticketAnzahl = tastatur.nextInt();
